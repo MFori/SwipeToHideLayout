@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
+
+    <cz.martinforejt.swipetohidelayout.SwipeToHideLayout
+        android:id="@+id/layout_left"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_green_dark"
+        app:direction="left">
+
+        <TextView
+            android:layout_width="1000dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:rotation="-90"
+            android:text="@string/swipe_me_left"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </cz.martinforejt.swipetohidelayout.SwipeToHideLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+
+        <cz.martinforejt.swipetohidelayout.SwipeToHideLayout
+            android:id="@+id/layout_top"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/holo_red_dark"
+            app:direction="top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/swipe_me_top"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </cz.martinforejt.swipetohidelayout.SwipeToHideLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_hide_left"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_hide_left" />
+
+            <Button
+                android:id="@+id/btn_hide_top"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_hide_top" />
+
+            <Button
+                android:id="@+id/btn_hide_right"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_hide_right" />
+
+            <Button
+                android:id="@+id/btn_hide_bottom"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_hide_bottom" />
+
+        </LinearLayout>
+
+        <cz.martinforejt.swipetohidelayout.SwipeToHideLayout
+            android:id="@+id/layout_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/holo_orange_dark"
+            app:direction="bottom">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/swipe_me_bottom"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </cz.martinforejt.swipetohidelayout.SwipeToHideLayout>
+
+    </RelativeLayout>
+
+    <cz.martinforejt.swipetohidelayout.SwipeToHideLayout
+        android:id="@+id/layout_right"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_dark"
+        app:direction="right">
+
+        <TextView
+            android:layout_width="1000dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:rotation="90"
+            android:text="@string/swipe_me_right"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </cz.martinforejt.swipetohidelayout.SwipeToHideLayout>
+
+</LinearLayout>

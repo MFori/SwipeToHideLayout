@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">SwipeToHideLayout</string>
+
+    <string name="btn_hide_left">hide left</string>
+    <string name="btn_show_left">show left</string>
+
+    <string name="btn_hide_top">hide top</string>
+    <string name="btn_show_top">show top</string>
+
+    <string name="btn_hide_right">hide right</string>
+    <string name="btn_show_right">show right</string>
+
+    <string name="btn_hide_bottom">hide bottom</string>
+    <string name="btn_show_bottom">show bottom</string>
+
+    <string name="swipe_me_left">swipe me left</string>
+    <string name="swipe_me_top">swipe me top</string>
+    <string name="swipe_me_right">swipe me right</string>
+    <string name="swipe_me_bottom">swipe me bottom</string>
+
+</resources>
