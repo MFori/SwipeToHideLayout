@@ -1,0 +1,2 @@
+# SwipeToHideLayout
+android lib
