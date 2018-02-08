@@ -8,3 +8,6 @@ Simple android lib for hiding out views by draging them out of screen in the set
 <a href="https://imgflip.com/gif/2475j2"><img src="https://i.imgflip.com/2475j2.gif" title="made at imgflip.com"/></a>
 
 ### Importing the library
+
+#### Javadoc
+<a href="https://mfori.github.io/SwipeToHideLayout/">https://mfori.github.io/SwipeToHideLayout/</a>
