@@ -54,6 +54,7 @@ public class SwipeToHideLayout extends FrameLayout implements SwipeHideable {
     private int _yDelta;
     private int _xDelta;
     private boolean hide;
+    private boolean animating = false;
     private Integer _y = null;
     private Integer _x = null;
 
@@ -184,27 +185,6 @@ public class SwipeToHideLayout extends FrameLayout implements SwipeHideable {
         this.listener = listener;
     }
 
-    private int getAnimationDuration(int speed) {
-        final ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) getLayoutParams();
-        int duration = 0;
-        switch (direction) {
-            case DIRECTION_LEFT:
-                duration = getWidth() + params.leftMargin;
-                break;
-            case DIRECTION_TOP:
-                duration = getHeight() + params.topMargin;
-                break;
-            case DIRECTION_RIGHT:
-                duration = getWidth() + params.rightMargin;
-                break;
-            case DIRECTION_BOTTOM:
-                duration = getHeight() + params.bottomMargin;
-                break;
-        }
-
-        return Math.abs(speed + duration);
-    }
-
     private void startHideAnimation(int speed) {
         if (direction == DIRECTION_NOT_SET)
             throw new SwipeNoDirectionException("You must set direction!");
@@ -243,11 +223,16 @@ public class SwipeToHideLayout extends FrameLayout implements SwipeHideable {
                 break;
         }
 
-        ValueAnimator animator = ValueAnimator.ofInt(ofValue, valueTo);
+        final ValueAnimator animator = ValueAnimator.ofInt(ofValue, valueTo);
         animator.setInterpolator(new DecelerateInterpolator());
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
+                if (!animating) {
+                    animator.cancel();
+                    return;
+                }
+
                 switch (direction) {
                     case DIRECTION_LEFT:
                         params.leftMargin = (Integer) animation.getAnimatedValue();
@@ -269,13 +254,22 @@ public class SwipeToHideLayout extends FrameLayout implements SwipeHideable {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                if (isVisible() && listener != null) {
-                    listener.onSwipeChange(false, SwipeToHideLayout.this);
+                if (animating) {
+                    if (isVisible() && listener != null) {
+                        listener.onSwipeChange(false, SwipeToHideLayout.this);
+                    }
+                    setVisibility(GONE);
                 }
-                setVisibility(GONE);
+                animating = false;
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                animating = true;
             }
         });
-        animator.setDuration(getAnimationDuration(speed));
+        animator.setDuration(speed);
         animator.start();
     }
 
@@ -301,11 +295,16 @@ public class SwipeToHideLayout extends FrameLayout implements SwipeHideable {
                 break;
         }
 
-        ValueAnimator animator = ValueAnimator.ofInt(ofValue, 0);
+        final ValueAnimator animator = ValueAnimator.ofInt(ofValue, 0);
         animator.setInterpolator(new DecelerateInterpolator());
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
+                if (!animating) {
+                    animator.cancel();
+                    return;
+                }
+
                 switch (direction) {
                     case DIRECTION_LEFT:
                         params.leftMargin = (Integer) animation.getAnimatedValue();
@@ -324,27 +323,35 @@ public class SwipeToHideLayout extends FrameLayout implements SwipeHideable {
             }
         });
         animator.addListener(new AnimatorListenerAdapter() {
+
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
                 setVisibility(VISIBLE);
+                animating = true;
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                if (!wasVisible) {
-                    listener.onSwipeChange(true, SwipeToHideLayout.this);
+                if (animating) {
+                    if (!wasVisible && listener != null) {
+                        listener.onSwipeChange(true, SwipeToHideLayout.this);
+                    }
                 }
+                animating = false;
             }
         });
-        animator.setDuration(getAnimationDuration(speed));
+        animator.setDuration(speed);
         animator.start();
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        if (animating) {
+            animating = false;
+        }
         if (enabled && isEnabled()) {
             Integer oldY = _y == null ? (int) ev.getRawY() : _y;
             _y = (int) ev.getRawY();
@@ -379,10 +386,10 @@ public class SwipeToHideLayout extends FrameLayout implements SwipeHideable {
                             _yDelta = _y - lParams.topMargin;
                             break;
                         case DIRECTION_RIGHT:
-                            _xDelta = _x - lParams.rightMargin;
+                            _xDelta = _x + lParams.rightMargin;
                             break;
                         case DIRECTION_BOTTOM:
-                            _yDelta = _y - lParams.bottomMargin;
+                            _yDelta = _y + lParams.bottomMargin;
                             break;
                     }
 

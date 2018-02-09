@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:baselineAligned="false">
 
     <cz.martinforejt.swipetohidelayout.SwipeToHideLayout
         android:id="@+id/layout_left"
-        android:layout_width="100dp"
+        android:layout_width="180dp"
         android:layout_height="match_parent"
         android:background="@android:color/holo_green_dark"
         app:direction="left">
@@ -35,7 +36,7 @@
         <cz.martinforejt.swipetohidelayout.SwipeToHideLayout
             android:id="@+id/layout_top"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="200dp"
             android:layout_alignParentTop="true"
             android:background="@android:color/holo_red_dark"
             app:direction="top">
@@ -87,7 +88,7 @@
         <cz.martinforejt.swipetohidelayout.SwipeToHideLayout
             android:id="@+id/layout_bottom"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="200dp"
             android:layout_alignParentBottom="true"
             android:background="@android:color/holo_orange_dark"
             app:direction="bottom">
@@ -107,7 +108,7 @@
 
     <cz.martinforejt.swipetohidelayout.SwipeToHideLayout
         android:id="@+id/layout_right"
-        android:layout_width="100dp"
+        android:layout_width="180dp"
         android:layout_height="match_parent"
         android:background="@android:color/holo_blue_dark"
         app:direction="right">
