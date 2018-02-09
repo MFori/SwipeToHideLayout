@@ -8,7 +8,10 @@ Simple android lib for hiding out views by draging them out of screen in the set
 <a href="https://imgflip.com/gif/2475j2"><img src="https://i.imgflip.com/2475j2.gif" title="made at imgflip.com"/></a>
 
 ### Importing the library
-todo: add to jcenter
+Simply add the following dependency to your build.gradle file:
+```
+compile 'cz.martinforejt:swipetohidelayout:1.0.1'
+```
 ### Usage
 Work with SwipeToHideLayout like with android FrameLayout
 ```
