@@ -13,7 +13,9 @@ Simply add the following dependency to your build.gradle file:
 compile 'cz.martinforejt:swipetohidelayout:1.0.3'
 ```
 ### Usage
-Work with SwipeToHideLayout like with android FrameLayout
+Work with SwipeToHideLayout like with android FrameLayout.
+<br/>Direction must be set (xml or ```setDirection(int)```) or exception will be thrown!
+The layout must be aligned to side that is defined by direction. The width/height can not be ```MATCH_PARENT``` in sliding direction.
 ```
 <cz.martinforejt.swipetohidelayout.SwipeToHideLayout
     android:id="@+id/layout_top"
