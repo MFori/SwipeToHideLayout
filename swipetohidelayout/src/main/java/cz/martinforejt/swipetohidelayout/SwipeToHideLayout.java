@@ -346,6 +346,33 @@ public class SwipeToHideLayout extends FrameLayout implements SwipeHideable {
         animator.start();
     }
 
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        if (!isVisible()) {
+            ViewGroup.MarginLayoutParams lParams = (ViewGroup.MarginLayoutParams) getLayoutParams();
+            boolean hiden = true;
+            switch (direction) {
+                case DIRECTION_LEFT:
+                    hiden = lParams.leftMargin == -getWidth();
+                    break;
+                case DIRECTION_TOP:
+                    hiden = lParams.topMargin == -getHeight();
+                    break;
+                case DIRECTION_RIGHT:
+                    hiden = lParams.rightMargin == -getWidth();
+                    break;
+                case DIRECTION_BOTTOM:
+                    hiden = lParams.bottomMargin == -getHeight();
+                    break;
+            }
+
+            if (!hiden) {
+                hide(0);
+            }
+        }
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
