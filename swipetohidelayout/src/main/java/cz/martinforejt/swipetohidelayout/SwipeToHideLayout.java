@@ -270,6 +270,7 @@ public class SwipeToHideLayout extends FrameLayout implements SwipeHideable {
             }
         });
         animator.setDuration(speed);
+        animating = true;
         animator.start();
     }
 
@@ -343,6 +344,7 @@ public class SwipeToHideLayout extends FrameLayout implements SwipeHideable {
             }
         });
         animator.setDuration(speed);
+        animating = true;
         animator.start();
     }
 
